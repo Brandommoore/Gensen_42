@@ -1,7 +1,8 @@
 #!/bin/bash
-#Gensen. API generator saver
-#Coded: BRMO
-#Version: v0.1
+
+#VARS
+bearer=""
+gnf_file="genFile.gnf"
 
 #Colours
 greenColour="\e[0;32m\033[1m"
@@ -13,46 +14,41 @@ purpleColour="\e[0;35m\033[1m"
 turquoiseColour="\e[0;36m\033[1m"
 grayColour="\e[0;37m\033[1m"
 
-#VARS
-uid=""
-secret=""
-bearer_key=""
-f_name="genFile.gnf"
 
-#Functions
-function genFile()
+# Functions
+function header()
 {
-	touch $f_name
-	date >> $f_name
+	echo -e "${greenColour}.________________________.______________.${endColour}"
+	echo -e "${greenColour}|                        |  *     ****  |${endColour}"
+	echo -e "${greenColour}| Welcome to GENSEN v0.1 |  *  *     *  |${endColour}"
+	echo -e "${greenColour}|                        |  ****  ****  |${endColour}"
+	echo -e "${greenColour}|     coded_by: BRMO     |     *  *     |${endColour}"
+	echo -e "${greenColour}|                        |     *  ****  |${endColour}"
+	echo -e "${greenColour}*------------------------*--------------*${endColour}"
+	echo
 }
 
-function genBearer()
+function check_gnf_file()
 {
-	touch bearer.bfl
-	bearer_str=$(curl -s -X POST --data "grant_type=client_credentials&client_id=$uid&client_secret=$secret" https://api.intra.42.fr/oauth/token > bearer.bfl)
-	bearer=$(cut -d ":" -f2 bearer.bfl | cut -d "," -f1 | cut -d '"' -f2)
-	rm bearer.bfl
-	echo $bearer
+	if [ -f "genFile.gnf" ]; then
+		echo "1" # File exist
+	else
+		echo "0" # File no exist
+	fi
 }
 
-#Main function
-echo -e "${greenColour}.________________________.______________.${endColour}"
-echo -e "${greenColour}|                        |  *     ****  |${endColour}"
-echo -e "${greenColour}| Welcome to GENSEN v0.1 |  *  *     *  |${endColour}"
-echo -e "${greenColour}|                        |  ****  ****  |${endColour}"
-echo -e "${greenColour}|     coded_by: BRMO     |     *  *     |${endColour}"
-echo -e "${greenColour}|                        |     *  ****  |${endColour}"
-echo -e "${greenColour}*------------------------*--------------*${endColour}"
-echo
-echo -ne "${yellowColour}Insert your UID key:${turquoiseColour}"
-read -p " " uid
-echo -ne "${yellowColour}Insert your SECRET key:${turquoiseColour}"
-read -p " " secret
-echo -e "${endColour}"
-genFile
-echo $uid >> $f_name
-echo $secret >> $f_name
-bearer=$(genBearer)
-echo $bearer >> $f_name
-echo
-echo -e "${yellowColour}Your BEARER token: ${endColour}${purpleColour} $bearer ${endColour}\n"
+# Manin function
+header
+
+if [ $(check_gnf_file) -eq 1 ]; then
+	bearer=$(tail -n1 $gnf_file)
+	if [ $bearer = "invalid_client" ]; then
+		bash gensen_linux.sh
+	else
+		echo -e "${yellowColour}Your BEARER token: ${endColour}${purpleColour} $bearer ${endColour}\n"
+	fi
+else
+	bash gensen_linux.sh
+fi
+
+#check_gnf_file
