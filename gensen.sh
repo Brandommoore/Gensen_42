@@ -4,27 +4,26 @@
 bearer=""
 gnf_file="genFile.gnf"
 
-#Colours
-greenColour="\e[0;32m\033[1m"
-endColour="\033[0m\e[0m"
-redColour="\e[0;31m\033[1m"
-blueColour="\e[0;34m\033[1m"
-yellowColour="\e[0;33m\033[1m"
-purpleColour="\e[0;35m\033[1m"
-turquoiseColour="\e[0;36m\033[1m"
-grayColour="\e[0;37m\033[1m"
-
+#COLORS
+ENDCOLOR="\033[0m"
+GREENCOLOR="\033[1;32m"
+REDCOLOR="\033[0;31m"
+BLUECOLOR="\033[0;34m"
+YELLOWCOLOR="\033[1;33m"
+PURPLECOLOR="\033[0;35m"
+TURQUOISECOLOR="\033[0;36m"
+GRAYCOLOR="\033[0;37m"
 
 # Functions
 function header()
 {
-	echo -e "${greenColour}.________________________.______________.${endColour}"
-	echo -e "${greenColour}|                        |  *     ****  |${endColour}"
-	echo -e "${greenColour}| Welcome to GENSEN v0.1 |  *  *     *  |${endColour}"
-	echo -e "${greenColour}|                        |  ****  ****  |${endColour}"
-	echo -e "${greenColour}|     coded_by: BRMO     |     *  *     |${endColour}"
-	echo -e "${greenColour}|                        |     *  ****  |${endColour}"
-	echo -e "${greenColour}*------------------------*--------------*${endColour}"
+	echo "${GREENCOLOR}.________________________.______________.${ENDCOLOR}"
+	echo "${GREENCOLOR}|                        |  *     ****  |${ENDCOLOR}"
+	echo "${GREENCOLOR}| Welcome to GENSEN v0.1 |  *  *     *  |${ENDCOLOR}"
+	echo "${GREENCOLOR}|                        |  ****  ****  |${ENDCOLOR}"
+	echo "${GREENCOLOR}|     coded_by: BRMO     |     *  *     |${ENDCOLOR}"
+	echo "${GREENCOLOR}|                        |     *  ****  |${ENDCOLOR}"
+	echo "${GREENCOLOR}*------------------------*--------------*${ENDCOLOR}"
 	echo
 }
 
@@ -45,7 +44,7 @@ if [ $(check_gnf_file) -eq 1 ]; then
 	if [ $bearer = "invalid_client" ]; then
 		bash gensen_linux.sh
 	else
-		echo -e "${yellowColour}Your BEARER token: ${endColour}${purpleColour} $bearer ${endColour}\n"
+		echo "${YELLOWCOLOR}Your BEARER token: ${ENDCOLOR}${PURPLECOLOR} $bearer ${ENDCOLOR}\n"
 	fi
 else
 	bash gensen_linux.sh

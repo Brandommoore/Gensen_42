@@ -3,15 +3,15 @@
 #Coded: BRMO
 #Version: v0.1
 
-#Colours
-greenColour="\e[0;32m\033[1m"
-endColour="\033[0m\e[0m"
-redColour="\e[0;31m\033[1m"
-blueColour="\e[0;34m\033[1m"
-yellowColour="\e[0;33m\033[1m"
-purpleColour="\e[0;35m\033[1m"
-turquoiseColour="\e[0;36m\033[1m"
-grayColour="\e[0;37m\033[1m"
+#COLORS
+ENDCOLOR="\033[0m"
+GREENCOLOR="\033[1;32m"
+REDCOLOR="\033[0;31m"
+BLUECOLOR="\033[0;34m"
+YELLOWCOLOR="\033[1;33m"
+PURPLECOLOR="\033[0;35m"
+TURQUOISECOLOR="\033[0;36m"
+GRAYCOLOR="\033[0;37m"
 
 #VARS
 uid=""
@@ -36,15 +36,15 @@ function genBearer()
 }
 
 #Main function
-echo -ne "${yellowColour}Insert your UID key:${turquoiseColour}"
+echo -ne "${YELLOWCOLOR}Insert your UID key:${TURQUOISECOLOR}"
 read -p " " uid
-echo -ne "${yellowColour}Insert your SECRET key:${turquoiseColour}"
+echo -ne "${YELLOWCOLOR}Insert your SECRET key:${TURQUOISECOLOR}"
 read -p " " secret
-echo -e "${endColour}"
+echo -e "${ENDCOLOR}"
 genFile
 echo $uid >> $f_name
 echo $secret >> $f_name
 bearer=$(genBearer)
 echo $bearer >> $f_name
 echo
-echo -e "${yellowColour}Your BEARER token: ${endColour}${purpleColour} $bearer ${endColour}\n"
+echo -e "${YELLOWCOLOR}Your BEARER token: ${ENDCOLOR}${PURPLECOLOR} $bearer ${ENDCOLOR}\n"
